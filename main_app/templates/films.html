@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Films</h1>
+    <p>Here is a list of the films we have in our database and where you can find them!</p>
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <p>{{movie.title}} ({{movie.year}}) </p>
+            <p>Streaming At: {{movie.streaming_at}} </p>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock  %}
