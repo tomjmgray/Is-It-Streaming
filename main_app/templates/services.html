@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Streaming Platforms</h1>
+
+{% for service in services %}
+    <h2>{{ service.name }}</h3>
+    <p>Monthly Subscription Cost: {{service.price}}</p>
+
+{% endfor %}
+{% endblock  %}
