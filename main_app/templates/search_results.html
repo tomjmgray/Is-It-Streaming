@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if movies.count %}
+    {% for movie in movies %}
+        <h2><a href="#">{{movie.title}}</a></h2>
+        <h3>Streaming on: {{movie.service_set[0].name}} </h3>
+    {% endfor %}
+{% else %}
+    <h1>No Results Found :( </h1>
+{% endif %}
+{% endblock  %}
