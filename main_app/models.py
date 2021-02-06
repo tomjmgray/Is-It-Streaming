@@ -17,3 +17,7 @@ class Service(models.Model):
     def __str__(self):
         return self.name
     
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    fav_movies = models.ManyToManyField(Movie, blank=True, null=True)
+    subbed_services = models.ManyToManyField(Service, blank=True, null=True)

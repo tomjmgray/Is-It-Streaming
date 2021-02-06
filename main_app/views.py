@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Movie, Service
+from .models import Movie, Service, Profile, User
 from . import urls
 
 # Create your views here.
@@ -45,4 +45,9 @@ def film_detail(request, movie_id):
     # context = {'results': results}
     # return render(request, 'search_results', context)
 
+def signup(request):
+    pass
+
+def profile(request):
+    pass
         
