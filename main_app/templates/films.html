@@ -6,8 +6,8 @@
     <ul>
     {% for movie in movies %}
         <li>
-            <p>{{movie.title}} ({{movie.year}}) </p>
-            <p>Streaming At: {{movie.streaming_at}} </p>
+            <p><a href="{% url 'film_detail' movie.id %}">{{movie.title}}</a> ({{movie.year}}) </p>
+            {% comment %} <p>Streaming At: {{movie.streaming_at}} </p> {% endcomment %}
         </li>
     {% endfor %}
     </ul>

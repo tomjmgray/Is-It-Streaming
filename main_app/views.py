@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Movie, Service
 from . import urls
@@ -21,8 +21,23 @@ def services(request):
 def search_movie(request):
     query = request.POST['query']
     movies = Movie.objects.filter(title__contains=query)
-    if movies:
+    if len(movies) == 1:
+        return redirect('film_detail', movie_id=movies[0].id)
+    elif movies:
         return render(request, 'search_results.html', {'movies': movies})
+
+def film_detail(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    # streaming = []
+    # for service in movie.service_set.objects.all():
+    #     streaming.append(service)
+    print('**********************')
+    print(movie.service_set.all)
+    context = {
+        'movie': movie,
+        # 'services': streaming
+    }
+    return render(request, 'film_detail.html', context)
 
     
     # query = request.POST.query

@@ -3,9 +3,9 @@
 {% block content %}
 
 {% if movies.count %}
+    <h1>Search Results</h1>
     {% for movie in movies %}
-        <h2><a href="#">{{movie.title}}</a></h2>
-        <h3>Streaming on: {{movie.service_set[0].name}} </h3>
+        <h2><a href="{% url 'film_detail' movie.id %}">{{movie.title}}</a></h2>
     {% endfor %}
 {% else %}
     <h1>No Results Found :( </h1>
