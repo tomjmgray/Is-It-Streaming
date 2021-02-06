@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Movie, Service, Profile, User
 from . import urls
+from .forms import ProfileForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -46,8 +50,23 @@ def film_detail(request, movie_id):
     # return render(request, 'search_results', context)
 
 def signup(request):
-    pass
+    error_message: ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('home')
+        else:
+            error_message = 'Invalid credentials, please enter valid credentials and try again.'
+    form = UserCreationForm()
+    context = {
+        'form': form,
+        # 'error_message': error_message
+    }
+    return render(request, 'registration/register.html', context)
 
 def profile(request):
-    pass
-        
+    return render(request, 'profile.html')
+
+
+            
