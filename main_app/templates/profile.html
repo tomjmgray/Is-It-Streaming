@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>profile</h1>
+<h1>{{profile.user.username}}</h1>
+<h2>{{profile.first_name}} {{profile.last_name}}</h2>
+<h2>Subscribed to:</h2>
+    <ul>
+        {%for service in profile.subbed_services.all%}
+        <li>{{service}}</li>
+        {% endfor %}
+    </ul>
+    <button><a href="{% url 'add_services' %}">Add Services</a></button>
+<h2>Favorited Movies:</h2>
+    <ul>
+        {% for movie in profile.fav_movies.all %}
+        <li>{{movie}}</li>
+        {% endfor %}
+    </ul>
+
+<button><a href="{% url 'edit_profile' %}">Edit Profile</a></button>
 {% endblock  %}

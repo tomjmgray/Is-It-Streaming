@@ -32,6 +32,10 @@ def search_movie(request):
 
 def film_detail(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        profile.fav_movies.add(movie)
+        return redirect('profile')
     # streaming = []
     # for service in movie.service_set.objects.all():
     #     streaming.append(service)
@@ -39,15 +43,16 @@ def film_detail(request, movie_id):
     print(movie.service_set.all)
     context = {
         'movie': movie,
-        # 'services': streaming
     }
     return render(request, 'film_detail.html', context)
 
-    
-    # query = request.POST.query
-    # results = Movie.objects.filter(name__icontains=query)
-    # context = {'results': results}
-    # return render(request, 'search_results', context)
+def add_services(request):
+    services = Service.objects.all()
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        profile.subbed_services.add(request.POST['service'])
+        return render(request, 'add_services.html', {'services': services})
+    return render(request, 'add_services.html', {'services': services})
 
 def signup(request):
     error_message: ''
@@ -55,9 +60,12 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('home')
+            print('User created!')
+            login(request, user)
+            
         else:
             error_message = 'Invalid credentials, please enter valid credentials and try again.'
+            print('Error creating user')
     form = UserCreationForm()
     context = {
         'form': form,
@@ -65,8 +73,40 @@ def signup(request):
     }
     return render(request, 'registration/register.html', context)
 
-def profile(request):
-    return render(request, 'profile.html')
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            print('Form is valid')
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            print(profile.user)
+            # profile.user = request.user.id
+            return redirect('profile')
+    services = Service.objects.all()
+    form = ProfileForm()
+    context = {
+        'form': form,
+        'services': services
+    }
+    return render(request, 'create_profile.html', context)
 
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect('create_profile')
+    else:
+        profile = Profile.objects.get(user=request.user)
+        print('********************', profile.subbed_services.all)
+        context = {
+            'profile': profile
+        }
+        return render(request, 'profile.html', context)
+
+def edit_profile(request):
+    if request.method == 'POST':
+        return render(request, 'edit_profile.html')
+    
+        
 
             

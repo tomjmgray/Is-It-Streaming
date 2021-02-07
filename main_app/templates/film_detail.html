@@ -5,5 +5,12 @@
     <h2>Streaming At: </h2>
     {% for service in movie.service_set.all%}
         <p>{{service.name}}</p>
+        
     {% endfor %}
+    {% if user.is_authenticated %}
+        <form action="{% url 'film_detail' movie.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Favorite</button>
+        </form>
+    {% endif %}
 {% endblock  %}

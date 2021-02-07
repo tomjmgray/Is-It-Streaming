@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'create_profile' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn" value="Create Profile">
+        <input type="hidden" name="next" value="{{ next }}">
+        
+    </form>
+{% endblock  %}
