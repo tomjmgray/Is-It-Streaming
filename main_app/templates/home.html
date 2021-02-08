@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to Is It Streaming!</h1>
-    <p>Your go-to destination to see which movies are streaming where!</p>
-    <p>Click <a href="/films">HERE</a> to see where your favorite movies are streaming!</p>
-    <p>Click <a href="/services">HERE</a> to see your favorite streaming services film library!</p>
 
-    <form method = "POST" action="{% url 'search_movie' %}">
-        {% csrf_token %}
-        <input type="text" name="query" placeholder="Search by title">
-        <button type="submit">Search</button>
-    </form>
+    <div class="container">
+            <h1>Welcome to Is It Streaming!</h1>
+            <p>Your go-to destination to see which movies are streaming where!</p>
+            <p>Search for a movie to get started, or make an account for bonus features!</p>
+    </div>
+
+
+    
 {% endblock  %}

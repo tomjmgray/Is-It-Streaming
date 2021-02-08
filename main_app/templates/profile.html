@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{profile.user.username}}</h1>
-<h2>{{profile.first_name}} {{profile.last_name}}</h2>
-<h2>Subscribed to:</h2>
-    <ul>
-        {%for service in profile.subbed_services.all%}
-        <li>{{service}}</li>
-        {% endfor %}
-    </ul>
-    <button><a href="{% url 'add_services' %}">Add Services</a></button>
-<h2>Favorited Movies:</h2>
-    <ul>
-        {% for movie in profile.fav_movies.all %}
-        <li>{{movie}}</li>
-        {% endfor %}
-    </ul>
+<div class="container">
 
-<button><a href="{% url 'edit_profile' %}">Edit Profile</a></button>
+    <div class="profile-basic-info">
+        <div class="profile-names">
+            <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+            <h2>{{profile.user.username}}</h1>
+            <button class="edit-button"><a href="{% url 'edit_profile' %}">Edit Profile</a></button>
+        </div>
+        
+    </div>
+    
+        <h2>Subscribed to:</h2>
+        <ul class="profile-subbed-services">
+            {%for service in profile.subbed_services.all%}
+            <li class="is_subbed_to">{{service}}</li>
+            {% endfor %}
+            
+        </ul>
+        <button><a href="{% url 'add_services' %}">Add Services</a></button>
+    
+        <h2>Favorited Movies:</h2>  
+        <ul class="profile-fav-movies">
+            {% if not profile.fav_movies.all %}
+                <p class="no-fav-movies">You have no favorited movies yet. Use our search feature to find some!</p>
+            {% else %}
+                {% for movie in profile.fav_movies.all %}
+                <a href="{% url 'film_detail' movie.id %}"><li>{{movie}}</li></a>
+                {% endfor %}
+            {% endif %}
+            
+        </ul>
+</div>
+
+
 {% endblock  %}

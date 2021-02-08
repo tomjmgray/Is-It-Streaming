@@ -3,14 +3,30 @@
 {% block content %}
     <h1>{{movie.title}} ({{movie.year}})</h1>
     <h2>Streaming At: </h2>
-    {% for service in movie.service_set.all%}
-        <p>{{service.name}}</p>
-        
-    {% endfor %}
+    <div>
+        {% for service in movie.service_set.all%}
+            {% if user.is_authenticated %} 
+                {% if service in profile.subbed_services.all %}
+                    <p class="is_subbed_to" >{{service.name}}</p>
+                {% else %}
+                    <p>{{service.name}}</p>
+                {% endif %}
+            {% else %}
+                
+            {% endif %}
+        {% endfor %}
+    </div>
+    
     {% if user.is_authenticated %}
-        <form action="{% url 'film_detail' movie.id %}" method="POST">
+        <form action="{% url 'film_detail' movie.id %}" method="POST" class="add_fav_btn">
             {% csrf_token %}
-            <button type="submit">Favorite</button>
+            <button type="submit">
+                {% if is_subscribed %}
+                    Remove from Favorites
+                {% else %}
+                    Add to Favorites
+                {% endif %}   
+            </button>
         </form>
     {% endif %}
 {% endblock  %}

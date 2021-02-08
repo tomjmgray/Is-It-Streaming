@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    
+<div class="container">
+    <h1 class="services-title">Services</h1>
     {% for service in services %}
-        <form action="{% url 'add_services' %}" method="POST">
-        {% csrf_token %}
-            <input type="hidden" name="service" value="{{service.id}}">
-            <button type="submit">{{service}}</button>
-        </form>
+        <div class="add-service-div">
+            {% if service in user.profile.subbed_services.all %}
+                <h2 class="is_subbed_to" >{{service.name}}</p>
+            {% else %}
+                <h2>{{ service.name }}</h2>
+                <form action="{% url 'add_services' %}" method="POST" class="add-service-form">
+                {% csrf_token %}
+                    <input type="hidden" name="service" value="{{service.id}}">
+                    <button type="submit">Add</button>
+                </form>
+            {% endif %}
+        </div>
+        <p>Monthly Subscription Cost: {{service.price}}</p>
         <br />
+        
     {% endfor %}
 
-    <button><a href="{% url 'profile' %}">Finished</a></button>
+    <button><a href="{% url 'profile' %}">Return to Profile</a></button>
+</div>
+    
 {% endblock  %}

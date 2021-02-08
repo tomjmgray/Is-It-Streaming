@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'edit_profile' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn" value="Save Profile">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+{% endblock  %}
