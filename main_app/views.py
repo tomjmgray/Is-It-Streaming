@@ -55,7 +55,7 @@ def film_detail(request, movie_id):
             if film == movie:
                 is_subscribed = True
     else:
-        profile: ''
+        profile = ''
     context = {
         'is_subscribed': is_subscribed,
         'movie': movie,

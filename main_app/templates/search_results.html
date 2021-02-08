@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    {% if movies.count %}
+        <h1>Search Results</h1>
+        {% for movie in movies %}
+            <h2><a href="{% url 'film_detail' movie.id %}">{{movie.title}}</a></h2>
+        {% endfor %}
+    {% else %}
+        <h1>No Results Found :( </h1>
+    {% endif %}
+</div>
 
-{% if movies.count %}
-    <h1>Search Results</h1>
-    {% for movie in movies %}
-        <h2><a href="{% url 'film_detail' movie.id %}">{{movie.title}}</a></h2>
-    {% endfor %}
-{% else %}
-    <h1>No Results Found :( </h1>
-{% endif %}
 {% endblock  %}
