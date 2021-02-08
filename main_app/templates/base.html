@@ -31,7 +31,7 @@
                 <a href="{% url 'profile' %}"><li>{{user.username}}</li></a>
                 <a href="{% url 'logout' %}"><li>Log Out</li></a>
                 {% else %}
-                <a href="{% url 'login' %}"><li>Log In</li></a>
+                <a href="{% url 'login' %}" class="left-margin"><li>Log In</li></a>
                 <a href="{% url 'signup' %}"><li>Register</li></a>
                 {%endif%}
             </ul>

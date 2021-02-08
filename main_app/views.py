@@ -93,7 +93,7 @@ def signup(request):
             user = form.save()
             print('User created!')
             login(request, user)
-            
+            return redirect('profile')
         else:
             error_message = 'Invalid credentials, please enter valid credentials and try again.'
             print('Error creating user')
@@ -150,5 +150,14 @@ def edit_profile(request):
             filled_form.save()
             return redirect('profile')
         
+@login_required
+def delete_profile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        profile.delete()
+        request.user.delete()
+        return redirect('logout')
+
+    return redirect('home')
 
             

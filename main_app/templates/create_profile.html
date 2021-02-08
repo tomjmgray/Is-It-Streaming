@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="short container">
+    <h2>Create Profile</h2>
     <form action="{% url 'create_profile' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn" value="Create Profile">
-        <input type="hidden" name="next" value="{{ next }}">
-        
-    </form>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn" value="Create Profile">
+            <input type="hidden" name="next" value="{{ next }}">
+            
+        </form>
+</div>
+    
 {% endblock  %}

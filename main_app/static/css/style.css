@@ -63,6 +63,14 @@ h2 {
     background-color: white;
 }
 
+.short {
+    max-height: 250px !important;
+}
+
+.medium {
+    max-height: 350px !important;
+}
+
 .services-div {
     justify-content: space-around;
 }
@@ -111,6 +119,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 nav a {
@@ -205,7 +214,6 @@ nav li {
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
 }
 
 .add-service-div {
@@ -219,6 +227,13 @@ nav li {
     font-size: 30px;
     height: 100%;
     display: inline-flex;
+}
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-service-form {
@@ -246,3 +261,7 @@ nav li {
     background-color: white !important;
     color: black  !important;
 } */
+
+.left-margin {
+    margin-left: 220px;
+}
