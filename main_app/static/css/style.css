@@ -59,8 +59,12 @@ h2 {
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: white;
+}
+
+.services-div {
+    justify-content: space-around;
 }
 
 /* .profile {
@@ -147,6 +151,8 @@ nav li {
     height: 56px;
     margin: 50px auto;
     display: inline-flex;
+    flex-wrap: wrap;
+    flex-shrink: 2;
     justify-content: space-around;
 }
 
